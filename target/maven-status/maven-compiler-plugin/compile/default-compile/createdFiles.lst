@@ -1,0 +1,17 @@
+variants\BuildingType.class
+calculations\PrzeplywOblicznieowyCalculations.class
+calculations\WplywNormatywnyCalculations.class
+calculations\VelocityCalculations.class
+Decoder.class
+calculations\PipeCalculations.class
+pipeTypeTables\SteelPipeTypeInfo.class
+calculations\PipeSelector$1.class
+variants\PipeType.class
+objects\NominalPipeInfo.class
+Main.class
+pipeTypeTables\PipeTypeTableInterface.class
+pipeTypeTables\PEXPipeInfo.class
+pipeTypeTables\PolipropylenPipeInfo.class
+calculations\PipeSelector.class
+calculations\PrzeplywOblicznieowyCalculations$1.class
+calculations\UnitConverter.class
