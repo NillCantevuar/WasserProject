@@ -4,7 +4,6 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -12,13 +11,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.wat.view.WindowController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#calculateBox" onMouseExited="#calculateBox" onMouseMoved="#calculateBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.wat.view.WindowController">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" percentWidth="20.0" prefWidth="129.5999755859375" />
     <ColumnConstraints halignment="CENTER" maxWidth="288.8" minWidth="0.0" prefWidth="39.80000000000001" />
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="330.800048828125" minWidth="10.0" prefWidth="202.3999755859375" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="249.800048828125" minWidth="3.400000000000034" prefWidth="68.80002441406248" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.9999877929687" minWidth="10.0" prefWidth="169.80000000000007" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="249.800048828125" minWidth="3.400000000000034" prefWidth="90.39998779296877" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.9999877929687" minWidth="10.0" prefWidth="149.60001220703123" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="62.4" minHeight="10.0" prefHeight="56.799993896484374" vgrow="SOMETIMES" />
@@ -71,16 +70,16 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="umywalkaQuantity" prefHeight="26.0" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="1" />
-      <TextField fx:id="zlewozmywakQuantity" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="wannaQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="natryskQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField fx:id="pralkaQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField fx:id="zmywarkaQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField fx:id="pisuarQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <TextField fx:id="pluczkaZbiornikowaQuantity" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <TextField fx:id="umywalkaQuantity" onKeyTyped="#calculate" prefHeight="26.0" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="1" />
+      <TextField fx:id="zlewozmywakQuantity" onKeyTyped="#calculate" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="wannaQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="natryskQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="pralkaQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField fx:id="zmywarkaQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="pisuarQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <TextField fx:id="pluczkaZbiornikowaQuantity" onKeyTyped="#calculate" promptText="0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Label alignment="CENTER" text="rodzaj budynku" GridPane.columnIndex="2" />
-       <ChoiceBox fx:id="buildingType" accessibleRole="CHECK_BOX" prefHeight="26.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" value="Budynki Mieszkalne">
+       <ChoiceBox fx:id="buildingType" accessibleRole="CHECK_BOX" onMouseEntered="#calculateBox" onMouseExited="#calculateBox" onMouseMoved="#calculateBox" prefHeight="26.0" prefWidth="150.0" value="Budynki Mieszkalne" GridPane.columnIndex="2" GridPane.rowIndex="1">
            <items>
                <FXCollections fx:factory="observableArrayList">
                    <String fx:value="Budynki Mieszkalne" />
@@ -95,7 +94,7 @@
       <Label text="rodzaj rury" GridPane.columnIndex="2" GridPane.rowIndex="3" />
 
 
-      <ChoiceBox fx:id="pipeType" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" value="Stal">
+      <ChoiceBox fx:id="pipeType" onInputMethodTextChanged="#calculate" prefWidth="150.0" value="Stal" GridPane.columnIndex="2" GridPane.rowIndex="4">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Stal" />
@@ -110,13 +109,12 @@
 
 
 
-      <Label text="max. predkosc [m/s] " GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <TextField fx:id="maxSpeed" maxWidth="-Infinity" prefHeight="26.0" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Button fx:id="countButton" mnemonicParsing="false" onAction="#calculate" prefHeight="34.0" prefWidth="148.0" text="Oblicz" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <Label text="Σqn :" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Label text="Qobl [dm3/s] :" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Label text="dn :" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <Label text="v [m/s] :" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+      <Label text="max. v [m/s] " GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <TextField fx:id="maxSpeed" maxWidth="-Infinity" onKeyTyped="#calculate" prefHeight="26.0" prefWidth="50.0" promptText="0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label text="Σqn [dm3/s]" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Label text="Qobl [dm3/s]" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Label text="dn" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <Label text="v [m/s]" GridPane.columnIndex="3" GridPane.rowIndex="5" />
       <Label text="Qobl [m3/h]" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <TextField fx:id="wyplywNormatywnyResult" maxWidth="100.0" prefHeight="26.0" prefWidth="100.0" promptText="0" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <TextField fx:id="QoblInDmResult" maxWidth="100.0" promptText="0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
