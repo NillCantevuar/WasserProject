@@ -45,12 +45,7 @@ public class PipeSelector {
              Double actualSpeed = VelocityCalculations.calculateVelociity(
                      przeplywObliczniowyInM3PerS,unitConverter.convertMM2ToM2(innerSectionInMM2));
 
-            BigDecimal asDecimal = new BigDecimal(actualSpeed);
-            BigDecimal maxDecimal = new BigDecimal(maxVelocity);
-
-
-
-                   if (asDecimal.compareTo(maxDecimal) >0) {
+                   if (actualSpeed > maxVelocity) {
 
                        if (i>0) {
                            temp = typeInterface.prepereTable().get(i - 1);

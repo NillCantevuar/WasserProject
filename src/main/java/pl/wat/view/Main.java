@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws Exception {
         GridPane mainGridPane = FXMLLoader.load(getClass().getResource("/CoreView.fxml"));

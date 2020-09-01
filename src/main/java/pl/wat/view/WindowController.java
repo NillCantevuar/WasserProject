@@ -35,25 +35,11 @@ public class WindowController {
     public TextField pipeResult;
     public TextField actualSpeedResult;
 
-    private boolean error = false;
+
 
 
     public void calculate(KeyEvent actionEvent) {
-        if (!error) {
-            double wyplywNormatywny = calculateWyplywNormatywny();
-            double przeplywObliczeniowy = calculatePrzeplywObliczeniowy();
-            wyplywNormatywnyResult.setText(String.valueOf(wyplywNormatywny));
-            QoblInDmResult.setText(String.valueOf(przeplywObliczeniowy));
-            QoblInMResult.setText(String.valueOf(unitConverter.convertDM3PerSToM3PerH(przeplywObliczeniowy)));
-            NominalPipeInfo nominalPipeInfo = pipeSelector.selectOptimalPipe(
-                    getPipeType(), Double.valueOf(maxSpeed.getText()), unitConverter.convertDM3PerSToM3PerS(przeplywObliczeniowy));
-            actualSpeedResult.setText(String.valueOf(nominalPipeInfo.getSpeed()));
-            setPipeResult(nominalPipeInfo);
-        }
-    }
 
-    public void calculateBox(MouseEvent actionEvent) {
-        if (!error) {
             double wyplywNormatywny = calculateWyplywNormatywny();
             double przeplywObliczeniowy = calculatePrzeplywObliczeniowy();
             wyplywNormatywnyResult.setText(String.valueOf(wyplywNormatywny));
@@ -63,11 +49,25 @@ public class WindowController {
                     getPipeType(), getVMax(), unitConverter.convertDM3PerSToM3PerS(przeplywObliczeniowy));
             actualSpeedResult.setText(String.valueOf(nominalPipeInfo.getSpeed()));
             setPipeResult(nominalPipeInfo);
-        }
+
+    }
+
+    public void calculateBox(MouseEvent actionEvent) {
+
+            double wyplywNormatywny = calculateWyplywNormatywny();
+            double przeplywObliczeniowy = calculatePrzeplywObliczeniowy();
+            wyplywNormatywnyResult.setText(String.valueOf(wyplywNormatywny));
+            QoblInDmResult.setText(String.valueOf(przeplywObliczeniowy));
+            QoblInMResult.setText(String.valueOf(unitConverter.convertDM3PerSToM3PerH(przeplywObliczeniowy)));
+            NominalPipeInfo nominalPipeInfo = pipeSelector.selectOptimalPipe(
+                    getPipeType(), getVMax(), unitConverter.convertDM3PerSToM3PerS(przeplywObliczeniowy));
+            actualSpeedResult.setText(String.valueOf(nominalPipeInfo.getSpeed()));
+            setPipeResult(nominalPipeInfo);
+
 
     }
     private double getVMax(){
-        return Double.parseDouble(maxSpeed.getText());
+        return verifyDouble(maxSpeed.getText());
     }
 
     private void setPipeResult(NominalPipeInfo nominalPipeInfo) {
@@ -78,38 +78,39 @@ public class WindowController {
             } else {
                 String stealText = null;
                 switch (demetntions) {
-                    case "168.3x4.5":
+                    case "168x4.5":
                         stealText = "DN150";
                         break;
-                    case "139.7x4.0":
+                    case "139x4.0":
                         stealText = "DN125";
                         break;
-                    case "114.3x3.6":
+                    case "114x3.6":
                         stealText = "DN100";
                         break;
-                    case "88.9x3.2":
+                    case "88x3.2":
                         stealText = "DN80";
                         break;
-                    case "76.1x2.9":
+                    case "76x2.9":
                         stealText = "DN65";
                         break;
-                    case "60.3x2.9":
+                    case "60x2.9":
                         stealText = "DN50";
                         break;
-                    case "48.3x2.6":
+                    case "48x2.6":
                         stealText = "DN40";
                         break;
-                    case "42.4x2.6":
+                    case "42x2.6":
                         stealText = "DN32";
                         break;
-                    case "33.7x2.6":
+                    case "33x2.6":
                         stealText = "DN25";
                         break;
-                    case "26.9x2.3":
+                    case "26x2.3":
                         stealText = "DN20";
                         break;
-                    case "21.3x2.0":
+                    case "21x2.0":
                         stealText = "DN15";
+                        break;
 
                 }
                 pipeResult.setText(stealText);
@@ -122,14 +123,14 @@ public class WindowController {
     private double calculateWyplywNormatywny() {
 
             return wplywNormatywnyCalculations.calculateWholeWplywNormatywny(
-                    Integer.parseInt(umywalkaQuantity.getText()),
-                    Integer.parseInt(zlewozmywakQuantity.getText()),
-                    Integer.parseInt(wannaQuantity.getText()),
-                    Integer.parseInt(natryskQuantity.getText()),
-                    Integer.parseInt(pralkaQuantity.getText()),
-                    Integer.parseInt(zmywarkaQuantity.getText()),
-                    Integer.parseInt(pisuarQuantity.getText()),
-                    Integer.parseInt(pluczkaZbiornikowaQuantity.getText()));
+                    verifyInt(umywalkaQuantity.getText()),
+                    verifyInt(zlewozmywakQuantity.getText()),
+                    verifyInt(wannaQuantity.getText()),
+                    verifyInt(natryskQuantity.getText()),
+                    verifyInt(pralkaQuantity.getText()),
+                    verifyInt(zmywarkaQuantity.getText()),
+                    verifyInt(pisuarQuantity.getText()),
+                    verifyInt(pluczkaZbiornikowaQuantity.getText()));
     }
 
     private double calculatePrzeplywObliczeniowy(){
@@ -176,23 +177,19 @@ public class WindowController {
     private int verifyInt(String input){
         try {
             int parsedInt = Integer.parseInt(input);
-            error =false;
             return parsedInt;
 
         }catch ( NumberFormatException e){
-            error = true;
+            return 0;
         }
-
-        return 0;
     }
     private double verifyDouble(String input){
         try {
             double parsedDouble = Double.parseDouble(input);
-            error =false;
             return parsedDouble;
         }catch ( NumberFormatException e){
-            error = true;
+            return 0;
         }
-        return 0;
+
     }
 }
