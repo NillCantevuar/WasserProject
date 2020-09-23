@@ -1,2 +1,1 @@
-# WasserProject
-aaaaaaaaaaaaaaaaaaaaaaaaaa
+WasserProject jest to aplikacja desktopowa, której głównym zadaniem jest wykonwywanie obliczeń właściwych przy projektach branży kanalizacyjno sanitarnej. Jej główne funkcjonalości to obliczanie wypływów normatywnych na podstawie liczby podanych elemntów, a także obliczenie na podstawie tego przepływu obliczeiowego dla wybranego rodzaju budynku. Finalnym zadaniem aplikacji jest dobór minimalnej średnicy wybranej rury dla podanej prędkości maksymalnej, biorąc pod uwagę obliczone wcześnie przepływy.
